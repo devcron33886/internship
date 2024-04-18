@@ -11,17 +11,17 @@ class UploadController extends Controller
         if ($request->hasFile('cover_letter') && $request->hasFile('resume')) {
             $coverLetterFile = $request->file('cover_letter');
             $coverLetterFilename = $coverLetterFile->getClientOriginalName();
-            $coverLetterFolder = uniqid() . '-' . now()->timestamp;
-            $coverLetterFile->storeAs('cover_letters/', $coverLetterFolder . '/' . $coverLetterFilename, 'public');
+            $coverLetterFolder = uniqid().'-'.now()->timestamp;
+            $coverLetterFile->storeAs('cover_letters/', $coverLetterFolder.'/'.$coverLetterFilename, 'public');
 
             $resumeFile = $request->file('resume');
             $resumeFilename = $resumeFile->getClientOriginalName();
-            $resumeFolder = uniqid() . '-' . now()->timestamp;
-            $resumeFile->storeAs('resumes/', $resumeFolder . '/' . $resumeFilename, 'public');
+            $resumeFolder = uniqid().'-'.now()->timestamp;
+            $resumeFile->storeAs('resumes/', $resumeFolder.'/'.$resumeFilename, 'public');
 
             return [
                 'cover_letter_folder' => $coverLetterFolder,
-                'resume_folder' => $resumeFolder
+                'resume_folder' => $resumeFolder,
             ];
         }
 

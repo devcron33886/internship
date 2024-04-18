@@ -99,41 +99,56 @@
                                 <div class="mt-8">
                                     <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
                                         <div>
-                                            <label for="first-name"
-                                                class="block text-sm font-medium text-gray-700">First name</label>
-                                            <div class="mt-1">
-                                                <input type="text" name="first-name" id="first-name"
-                                                    autocomplete="given-name"
-                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" />
-                                            </div>
+                                            <x-input-label for="name" :value="__('Name')" />
+                                            <x-text-input id="name" class="block mt-1 w-full" type="text"
+                                                name="name" :value="old('name')" required autofocus
+                                                autocomplete="name" />
+                                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                         </div>
                                         <div>
-                                            <label for="last-name" class="block text-sm font-medium text-gray-700">Last
-                                                name</label>
-                                            <div class="mt-1">
-                                                <input type="text" name="last-name" id="last-name"
-                                                    autocomplete="family-name"
-                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" />
-                                            </div>
+                                            <x-input-label for="email" :value="__('Email')" />
+                                            <x-text-input id="email" class="block mt-1 w-full" type="email"
+                                                name="email" :value="old('email')" required autocomplete="username" />
+                                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         </div>
                                         <div>
-                                            <label for="email"
-                                                class="block text-sm font-medium text-gray-700">Email</label>
+                                            <x-input-label for="phone" :value="__('Phone')" />
+                                            <x-text-input id="phone" class="block mt-1 w-full" type="tel"
+                                                name="phone" :value="old('phone')" />
+                                            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between">
+                                                <label for="type"
+                                                    class="block text-sm font-medium text-gray-700">Application
+                                                    Type</label>
+                                            </div>
                                             <div class="mt-1">
-                                                <input id="email" name="email" type="email"
-                                                    autocomplete="email"
-                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" />
+                                                <select name="type" type="select"
+                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                                    <option selected>Choose application type</option>
+                                                    <option value="Internship">Internship</option>
+                                                    <option value="Volunteering">Volunteering</option>
+                                                </select>
+                                                <x-input-error :messages="$errors->get('type')" class="mt-2" />
                                             </div>
                                         </div>
                                         <div>
                                             <div class="flex justify-between">
-                                                <label for="phone"
-                                                    class="block text-sm font-medium text-gray-700">Phone</label>
+                                                <label for="type"
+                                                    class="block text-sm font-medium text-gray-700">Choose Department
+                                                    to work in.</label>
                                             </div>
                                             <div class="mt-1">
-                                                <input type="text" name="phone" id="phone"
-                                                    autocomplete="tel"
-                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" />
+                                                <select name="department_id" type="select"
+                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                                    <option selected>Choose Department</option>
+                                                    @foreach (\App\Models\Department::all() as $department)
+                                                        <option value="{{ $department->id }}">{{ $department->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <x-input-error :messages="$errors->get('department_id')" class="mt-2" />
                                             </div>
                                         </div>
                                         <div>

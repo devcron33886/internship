@@ -13,12 +13,14 @@ class Application extends Model
     use HasFactory,SoftDeletes;
 
     protected $fillable = [
+        'department_id',
         'name',
         'email',
         'phone',
         'cover_letter',
         'resume',
         'status',
+        'type',
         'interview_date',
         'interview_notes',
     ];
@@ -27,8 +29,8 @@ class Application extends Model
         'status' => ApplicationStatus::class,
     ];
 
-    public function internship(): BelongsTo
+    public function department(): BelongsTo
     {
-        return $this->belongsTo(Internship::class);
+        return $this->belongsTo(Department::class);
     }
 }

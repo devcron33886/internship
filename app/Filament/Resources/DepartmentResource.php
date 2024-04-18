@@ -14,8 +14,14 @@ class DepartmentResource extends Resource
 {
     protected static ?string $model = Department::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
 
+    protected static ?string $recordTitleAttribute = 'name';
+
+    protected static ?string $navigationGroup = 'Departments';
+
+    protected static ?int $navigationSort = 1;
+    
     public static function form(Form $form): Form
     {
         return $form
@@ -45,7 +51,7 @@ class DepartmentResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

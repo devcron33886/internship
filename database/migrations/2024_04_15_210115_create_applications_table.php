@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('internship_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('department_id')->references('id')->on('departments');
             $table->string('name');
             $table->string('email');
             $table->string('phone');
             $table->string('cover_letter');
             $table->string('resume');
+            $table->string('type');
             $table->string('status')->default('pending');
-            $table->date('interview_date');
+            $table->date('interview_date')->nullable();
             $table->longText('interview_notes')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -16,8 +16,8 @@ class ApplicationController extends Controller
         $application->phone = $request->phone;
         $application->interview_date = now()->addWeeks(2);
 
-        $application->addMedia(storage_path('app/public/cover_letters' . $request->cover_letter))->toMediaCollection('cover_letter');
-        $application->addMedia(storage_path('app/public/resumes' . $request->resume))->toMediaCollection('resume');
+        $application->addMedia(storage_path('app/public/cover_letters'.$request->cover_letter))->toMediaCollection('cover_letter');
+        $application->addMedia(storage_path('app/public/resumes'.$request->resume))->toMediaCollection('resume');
         $application->save();
     }
 }

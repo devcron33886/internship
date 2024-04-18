@@ -28,22 +28,22 @@ enum ApplicationStatus: string implements HasColor, HasIcon, HasLabel
     public function getColor(): string|array|null
     {
         return match ($this) {
-            self::PENDING => 'yellow',
-            self::SHORTLISTED => 'green',
-            self::INTERVIEWED => 'blue',
-            self::SELECTED => 'purple',
-            self::REJECTED => 'red',
+            self::PENDING => 'warning',
+            self::SHORTLISTED => 'success',
+            self::INTERVIEWED => 'info',
+            self::SELECTED => 'success',
+            self::REJECTED => 'danger',
         };
     }
 
     public function getIcon(): ?string
     {
         return match ($this) {
-            self::PENDING => 'heroicon-o-user',
-            self::SHORTLISTED => 'heroicon-o-user',
-            self::INTERVIEWED => 'heroicon-o-user',
-            self::SELECTED => 'heroicon-o-user',
-            self::REJECTED => 'heroicon-o-user',
+            self::PENDING => 'heroicon-o-exclamation-triangle',
+            self::SHORTLISTED => 'heroicon-o-check-circle',
+            self::INTERVIEWED => 'heroicon-o-check',
+            self::SELECTED => 'heroicon-o-check-badge',
+            self::REJECTED => 'heroicon-o-x-circle',
         };
     }
 }
