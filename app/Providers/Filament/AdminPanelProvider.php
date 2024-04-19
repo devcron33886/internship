@@ -35,7 +35,7 @@ class AdminPanelProvider extends PanelProvider
                 'warning' => Color::Yellow,
                 'info' => Color::Blue,
                 'dark' => Color::Gray,
-                
+
             ])
             ->navigationGroups([
                 'Applications',

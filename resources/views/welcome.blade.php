@@ -11,9 +11,6 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
 
-    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
-
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -91,162 +88,15 @@
                     <div class="absolute inset-0 h-1/2 bg-gray-50"></div>
                     <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden lg:max-w-none lg:flex">
-                            <form action="" method="POST" class="flex-1 bg-white px-6 py-8 lg:p-12" id="apply"
-                                enctype="multipart/form-data">
-                                @csrf
-                                <h3 class="text-2xl font-extrabold text-gray-900 sm:text-3xl">Application Form</h3>
-
-                                <div class="mt-8">
-                                    <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
-                                        <div>
-                                            <x-input-label for="name" :value="__('Name')" />
-                                            <x-text-input id="name" class="block mt-1 w-full" type="text"
-                                                name="name" :value="old('name')" required autofocus
-                                                autocomplete="name" />
-                                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                                        </div>
-                                        <div>
-                                            <x-input-label for="email" :value="__('Email')" />
-                                            <x-text-input id="email" class="block mt-1 w-full" type="email"
-                                                name="email" :value="old('email')" required autocomplete="username" />
-                                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                                        </div>
-                                        <div>
-                                            <x-input-label for="phone" :value="__('Phone')" />
-                                            <x-text-input id="phone" class="block mt-1 w-full" type="tel"
-                                                name="phone" :value="old('phone')" />
-                                            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-                                        </div>
-                                        <div>
-                                            <div class="flex justify-between">
-                                                <label for="type"
-                                                    class="block text-sm font-medium text-gray-700">Application
-                                                    Type</label>
-                                            </div>
-                                            <div class="mt-1">
-                                                <select name="type" type="select"
-                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                                                    <option selected>Choose application type</option>
-                                                    <option value="Internship">Internship</option>
-                                                    <option value="Volunteering">Volunteering</option>
-                                                </select>
-                                                <x-input-error :messages="$errors->get('type')" class="mt-2" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="flex justify-between">
-                                                <label for="type"
-                                                    class="block text-sm font-medium text-gray-700">Choose Department
-                                                    to work in.</label>
-                                            </div>
-                                            <div class="mt-1">
-                                                <select name="department_id" type="select"
-                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                                                    <option selected>Choose Department</option>
-                                                    @foreach (\App\Models\Department::all() as $department)
-                                                        <option value="{{ $department->id }}">{{ $department->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                <x-input-error :messages="$errors->get('department_id')" class="mt-2" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label for="message" class="block text-sm font-medium text-gray-700">
-                                                Upload Resume
-                                            </label>
-                                            <div class="mt-1">
-                                                <input type="file" name="resume" id="resume">
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label for="message" class="block text-sm font-medium text-gray-700">
-                                                Upload Cover Letter
-                                            </label>
-                                            <div class="mt-1">
-                                                <input type="file" name="cover_letter" id="cover_letter">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-6">
-                                        <button type="submit"
-                                            class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto">
-                                            Submit
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+                            <livewire:application-form />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white">
-            <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-                <div class="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
-                    <div>
-                        <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                            About Our Volunteer Program
-                        </h2>
-                        <p class="mt-3 max-w-3xl text-lg text-gray-500">
-                            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
-                            Elit sunt amet fugiat veniam occaecat fugiat aliqua.
-                        </p>
-                    </div>
-                    <div class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:mt-0">
-                        <div class="pt-6">
-                            <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-                                <div class="-mt-6">
-                                    <div>
-                                        <span
-                                            class="inline-flex items-center justify-center p-3 bg-indigo-500 rounded-md shadow-lg">
-                                            <!-- Heroicon name: outline/globe-alt -->
-                                            <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Worldwide Impact
-                                    </h3>
-                                    <p class="mt-5 text-base text-gray-500">
-                                        Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit
-                                        morbi lobortis.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pt-6">
-                            <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-                                <div class="-mt-6">
-                                    <div>
-                                        <span
-                                            class="inline-flex items-center justify-center p-3 bg-indigo-500 rounded-md shadow-lg">
-                                            <!-- Heroicon name: outline/globe-alt -->
-                                            <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Worldwide Impact
-                                    </h3>
-                                    <p class="mt-5 text-base text-gray-500">
-                                        Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit
-                                        morbi lobortis.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+
         <footer class="bg-red-900">
             <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
                 <div class="flex justify-center space-x-6 md:order-2">
@@ -291,25 +141,7 @@
         </footer>
     </div>
 
-    <script>
-        // Get a reference to the file input elements
-        const coverLetterInput = document.querySelector('input[id="cover_letter"]');
-        const resumeInput = document.querySelector('input[id="resume"]');
 
-        // Create FilePond instances for both file inputs
-        const coverLetterPond = FilePond.create(coverLetterInput);
-        const resumePond = FilePond.create(resumeInput);
-
-        // Set the server options for both file inputs
-        FilePond.setOptions({
-            server: {
-                url: '/uploads',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            }
-        });
-    </script>
 
 </body>
 

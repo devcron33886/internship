@@ -35,7 +35,7 @@ class ApplicationTypeOverview extends BaseWidget
                 ->icon('heroicon-o-x-circle'),
             Stat::make('Selected', Application::query()
                 ->where('status', ApplicationStatus::SELECTED)
-            
+
                 ->count())
                 ->color('success')
                 ->chart([7, 2, 10, 3, 15, 4, 17])

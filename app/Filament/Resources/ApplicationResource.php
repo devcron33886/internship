@@ -29,43 +29,41 @@ class ApplicationResource extends Resource
             ->schema([
                 Forms\Components\Section::make()->schema([
                     Forms\Components\Select::make('department_id')
-                    ->relationship('department', 'name')
-                    ->native(false)
-                   
-                    ->placeholder('Select department.')
-                ->searchable()
-                    ->required(),
-                Forms\Components\TextInput::make('name')
-                    ->placeholder('Enter your both names')
-                    ->required(),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->placeholder('Enter your email we can reach out to you.')
-                    ->required(),
-                Forms\Components\TextInput::make('phone')
-                    ->placeholder('Enter your phone we can reach out to you.')
-                    ->required(),
-                Forms\Components\FileUpload::make('cover_letter')
-                    ->label('Upload your cover letter.')
-                    ->required(),
-                Forms\Components\FileUpload::make('resume')
-                    ->label('Upload your resume.')
-                    ->required(),
-                Forms\Components\Select::make('type')
-                    ->options(['Internship', 'Volunteering'])
-                    ->native(false)
-                    ->required(),
-                Forms\Components\Select::make('status')
-                    ->options(ApplicationStatus::class)
-                    ->native(false)
-                    ->reactive()
-                    ->required(),
-                Forms\Components\DatePicker::make('interview_date'),
-                Forms\Components\Textarea::make('interview_notes')
-                    ->columnSpanFull(),
+                        ->relationship('department', 'name')
+                        ->native(false)
+                        ->placeholder('Select department.')
+                        ->searchable()
+                        ->required(),
+                    Forms\Components\TextInput::make('name')
+                        ->placeholder('Enter your both names')
+                        ->required(),
+                    Forms\Components\TextInput::make('email')
+                        ->email()
+                        ->placeholder('Enter your email we can reach out to you.')
+                        ->required(),
+                    Forms\Components\TextInput::make('phone')
+                        ->placeholder('Enter your phone we can reach out to you.')
+                        ->required(),
+                    Forms\Components\FileUpload::make('cover_letter')
+                        ->label('Upload your cover letter.')
+                        ->required(),
+                    Forms\Components\FileUpload::make('resume')
+                        ->label('Upload your resume.')
+                        ->required(),
+                    Forms\Components\Select::make('type')
+                        ->options(['Internship', 'Volunteering'])
+                        ->native(false)
+                        ->required(),
+                    Forms\Components\Select::make('status')
+                        ->options(ApplicationStatus::class)
+                        ->native(false)
+                        ->reactive()
+                        ->required(),
+                    Forms\Components\DatePicker::make('interview_date'),
+                    Forms\Components\Textarea::make('interview_notes')
+                        ->columnSpanFull(),
                 ])->columns(3),
-                
-                
+
             ]);
     }
 

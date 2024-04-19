@@ -27,7 +27,6 @@ class StoreApplicationRequest extends FormRequest
             'email' => 'required|email',
             'phone' => 'required|string',
             'cover_letter' => 'required|file|mimes:pdf',
-            'resume' => 'required|file|mimes:pdf',
         ];
     }
 }
