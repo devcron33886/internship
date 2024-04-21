@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Application extends Model
+class Application extends Model implements HasMedia
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory,InteractsWithMedia,SoftDeletes;
+
+    protected $appends = ['resume'];
 
     protected $fillable = [
         'department_id',
@@ -18,9 +22,9 @@ class Application extends Model
         'email',
         'phone',
         'cover_letter',
-        'resume',
         'status',
         'type',
+        'biography',
         'interview_date',
         'interview_notes',
     ];
@@ -32,5 +36,10 @@ class Application extends Model
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function getResumeAttribute()
+    {
+        return $this->getMedia('resume')->last();
     }
 }

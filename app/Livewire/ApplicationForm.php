@@ -3,9 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Application;
+use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Livewire\Component;
@@ -57,10 +57,10 @@ class ApplicationForm extends Component implements HasForms
             ->model(Application::class);
     }
 
-    public function create():void
+    public function create(): void
     {
-        $data=$this->form->getState();
-        $application=Application::create($data);
+        $data = $this->form->getState();
+        $application = Application::create($data);
         $this->form->model($application)->saveRelationships();
 
         Notification::make()
@@ -68,7 +68,7 @@ class ApplicationForm extends Component implements HasForms
             ->success()
             ->send();
 
-            $this->form->fill();
+        $this->form->fill();
 
     }
 

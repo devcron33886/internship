@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->string('cover_letter');
-            $table->string('resume');
+            $table->longText('biography');
             $table->string('type');
             $table->string('status')->default('pending');
             $table->date('interview_date')->nullable();

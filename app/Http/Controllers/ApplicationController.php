@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\StoreApplicationRequest;
 use App\Models\Application;
 
 class ApplicationController extends Controller
 {
+    use MediaUploadingTrait;
+
     public function store(StoreApplicationRequest $request)
     {
-        $application = new Application();
-        $application->internship_id = $request->internship_id;
-        $application->name = $request->name;
-        $application->email = $request->email;
-        $application->phone = $request->phone;
-        $application->interview_date = now()->addWeeks(2);
+        $application = Application::create($request->validated());
 
-        $application->addMedia(storage_path('app/public/cover_letters/tmp/'.$request->cover_letter))->toMediaCollection('cover_letter');
-        $application->save();
+        if ($request->hasFile('resume')) {
+            $application->addMedia($request->file('resume'))->toMediaCollection('resume');
+        }
+
+        return redirect()->route('welcome')->with('success', 'Application submitted successfully.');
     }
 }

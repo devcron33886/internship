@@ -22,11 +22,12 @@ class StoreApplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'internship_id' => 'required|exists:internships,id',
+            'department_id' => 'required|exists:departments,id',
             'name' => 'required|string',
             'email' => 'required|email',
             'phone' => 'required|string',
-            'cover_letter' => 'required|file|mimes:pdf',
+            'biography' => 'required|string',
+            'type' => 'required|string',
         ];
     }
 }
