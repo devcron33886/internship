@@ -30,7 +30,7 @@ class ApplicationForm extends Component implements HasForms
                         ->relationship('department', 'name')
                         ->native(false)
                         ->placeholder('Select department.')
-                        ->searchable()
+                        
                         ->required(),
                     Forms\Components\TextInput::make('name')
                         ->placeholder('Enter your both names')
@@ -52,7 +52,7 @@ class ApplicationForm extends Component implements HasForms
                         ->options(['Internship', 'Volunteering'])
                         ->native(false)
                         ->required(),
-                ])->columns(3),
+                ])->columns(2),
             ])->statePath('data')
             ->model(Application::class);
     }

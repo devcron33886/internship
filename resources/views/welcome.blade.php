@@ -7,10 +7,13 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,700,600&display=swap" rel="stylesheet" />
-    <!-- Styles -->
-    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
-    <!-- Scripts -->
+
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+    @filamentStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -80,7 +83,7 @@
                     <div class="absolute inset-0 h-1/2 bg-gray-50"></div>
                     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden lg:max-w-none lg:flex">
-                            <form action="{{ route('applications.store') }}" method="POST" enctype="multipart/form-data" class="flex-1 bg-white px-6 py-8 lg:p-12">
+                            <div class="flex-1 bg-white px-6 py-8 lg:p-12">
                                 @csrf
                                 <h3 class="text-2xl font-extrabold text-gray-900 sm:text-3xl">Volunteer Application</h3>
                                 <p class="mt-6 text-base text-gray-700">
@@ -88,66 +91,7 @@
                                     commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
                                 </p>
                                 <div class="mt-8">
-                                    <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
-                                        <div>
-                                            <label for="department" class="block text-sm font-medium text-gray-700">Department</label>
-                                            <div class="mt-1">
-                                                <x-select-department id="department" name="department_id" class="block mt-1 w-full" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label for="type" class="block text-sm font-medium text-gray-700">Choose how you will work with us.</label>
-                                            <div class="mt-1">
-                                                <select id="type" name="type" class="block mt-1 w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-red-700 focus:border-red-700 sm:text-sm rounded-md">
-                                                    <option value="">Choose how you will work with us.</option>
-                                                    <option value="Internship">Internship</option>
-                                                    <option value="Volunteer">Volunteer</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <x-input-label for="name" :value="__('Name')" />
-                                            <div class="mt-1">
-                                                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-                                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <x-input-label for="email" :value="__('Email')" />
-                                            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-                                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                                        </div>
-                                        <div>
-                                            <x-input-label for="phone" :value="__('Phone')" />
-                                            <div class="mt-1">
-                                                <x-text-input id="phone" class="block mt-1 w-full" type="tel" name="phone" :value="old('phone')" required   />
-                                                <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-                                            </div>
-                                        </div>
-                                        <div class="sm:col-span-2">
-                                             <x-input-label for="resume" :value="__('Resume')" />
-                                            <div class="mt-1">
-                                               <x-text-input id="resume" type="file" name="email" :value="old('resume')"/>
-                                            <x-input-error :messages="$errors->get('resume')" class="mt-2" />
-                                            </div>
-                                        </div>
-                                        <div class="sm:col-span-2">
-                                            <label for="biography" class="block text-sm font-medium text-gray-700">
-                                                Why are you interested in volunteering(Tell us a little bit about you)?
-                                            </label>
-                                            <div class="mt-1">
-                                                <textarea id="biography" name="biography" rows="4"
-                                                    class="shadow-sm focus:ring-red-700 focus:border-red-700 block w-full sm:text-sm border border-gray-300 rounded-md"
-                                                    placeholder="Tell us a little bit about you"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-6">
-                                        <button type="submit"
-                                            class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700 sm:w-auto">
-                                            Apply Now
-                                        </button>
-                                    </div>
+                                    <livewire:application-form/>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +99,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <footer class="bg-red-900">
         <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
@@ -199,22 +142,6 @@
             </div>
         </div>
     </footer>
-   
-        <script>
-            // Get a reference to the file input element
-            const inputElement = document.querySelector('input[id="resume"]');
-            // Create a FilePond instance
-            const pond = FilePond.create(inputElement);
-            FilePond.setOptions({
-                server: {
-                    url: '/applications/media',
-                    headers: {
-                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                }
-            });
-        </script>
-
+    @filamentScripts
 </body>
-
 </html>
