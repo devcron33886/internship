@@ -3,25 +3,21 @@
 namespace App\Models;
 
 use App\Models\Enum\ApplicationStatus;
+use App\Models\Enum\ApplicationType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Application extends Model implements HasMedia
+class Application extends Model
 {
-    use HasFactory,InteractsWithMedia,SoftDeletes;
-
-    protected $appends = ['resume'];
+    use HasFactory,SoftDeletes;
 
     protected $fillable = [
         'department_id',
         'name',
         'email',
         'phone',
-        'cover_letter',
         'status',
         'type',
         'biography',
@@ -31,15 +27,11 @@ class Application extends Model implements HasMedia
 
     protected $casts = [
         'status' => ApplicationStatus::class,
+        'type' => ApplicationType::class,
     ];
 
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
-    }
-
-    public function getResumeAttribute()
-    {
-        return $this->getMedia('resume')->last();
     }
 }

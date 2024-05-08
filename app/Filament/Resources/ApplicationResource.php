@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ApplicationResource\Pages;
 use App\Models\Application;
 use App\Models\Enum\ApplicationStatus;
+use App\Models\Enum\ApplicationType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -44,14 +45,15 @@ class ApplicationResource extends Resource
                     Forms\Components\TextInput::make('phone')
                         ->placeholder('Enter your phone we can reach out to you.')
                         ->required(),
-                    Forms\Components\FileUpload::make('cover_letter')
-                        ->label('Upload your cover letter.')
-                        ->required(),
-                    Forms\Components\FileUpload::make('resume')
-                        ->label('Upload your resume.')
+                    Forms\Components\Textarea::make('biography')
+                        ->placeholder('Tell us a little bit about you.')
+                        ->rows(5)
+                        ->cols(10)
+                        ->maxLength(500)
+                        ->minLength(120)
                         ->required(),
                     Forms\Components\Select::make('type')
-                        ->options(['Internship', 'Volunteering'])
+                        ->options(ApplicationType::class)
                         ->native(false)
                         ->required(),
                     Forms\Components\Select::make('status')
