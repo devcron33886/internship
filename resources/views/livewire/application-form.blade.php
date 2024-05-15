@@ -27,9 +27,9 @@
         @error('type')<div class="text-sm text-red-500 font-normal">{{ $message }}</div>@enderror
     </label>
     <label class="flex flex-col gap-2 mt-4">
-        Which Department you want to apply in ? *
+        Which Project are you interested in ? *
         <select id="department" wire:model="department_id" class="border-gray-300 focus:border-red-800 focus:ring-red-800 rounded-md shadow-sm block mt-2 w-full">
-                <option value="" selected disabled>Select Department</option>
+                <option value="" selected disabled>Select Project</option>
                 @foreach ($departments as $department)
                     <option value="{{ $department->id }}">{{ $department->name }}</option>
                 @endforeach
