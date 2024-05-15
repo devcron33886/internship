@@ -14,50 +14,21 @@ class DepartmentSeeder extends Seeder
     {
         $projects = [
             [
-                'name' => 'Masonry',
+                'name' => 'Early Childhood Program',
                 'created_at' => now(),
             ],
             [
-                'name' => 'Hairdressing',
+                'name' => 'TVET',
                 'created_at' => now(),
             ],
             [
-                'name' => 'Tailoring',
+                'name' => 'Microcredit',
                 'created_at' => now(),
             ],
             [
-                'name' => 'Welding',
+                'name' => 'Basic Education and Dropout Control',
                 'created_at' => now(),
             ],
-            [
-                'name' => 'Autoengine Repair',
-                'created_at' => now(),
-            ],
-            [
-                'name' => 'Multimedia',
-                'created_at' => now(),
-            ],
-            [
-                'name' => 'Plumbing',
-                'created_at' => now(),
-            ],
-            [
-                'name' => 'Carpentry',
-                'created_at' => now(),
-            ],
-            [
-                'name' => 'Electricity',
-                'created_at' => now(),
-            ],
-            [
-                'name' => 'Culnary Art',
-                'created_at' => now(),
-            ],
-            [
-                'name' => 'Leather Processing',
-                'created_at' => now(),
-            ],
-
         ];
         Department::insert($projects);
     }
