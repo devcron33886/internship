@@ -13,6 +13,8 @@
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
     <!-- Fonts -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <style>
         [x-cloak] {
             display: none !important;
@@ -30,9 +32,9 @@
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden lg:max-w-none lg:flex">
                         <div class="flex-1 bg-white px-6 py-8 lg:p-12">
-                          
+
                             <h3 class="text-2xl font-extrabold text-red-700 sm:text-3xl">Application Form</h3>
-                          
+
                             <div class="mt-8">
                                 <livewire:application-form/>
                             </div>

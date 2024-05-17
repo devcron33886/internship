@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Application extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'department_id',
@@ -19,6 +19,7 @@ class Application extends Model
         'email',
         'phone',
         'status',
+        'document',
         'type',
         'biography',
         'interview_date',

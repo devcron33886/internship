@@ -39,7 +39,7 @@ class ApplicationNotification extends Notification
         return (new MailMessage)
             ->subject('Interested in working at FMO Rwanda')
             ->greeting('Hello! Mrs. Alice')
-            ->line($this->application->name.' is interested in working at FMO Rwanda as' .$this->application->type->getLabel() .' in trade of '.$this->application->department->name)
+            ->line($this->application->name.' is interested in working at FMO Rwanda as'.$this->application->type->getLabel().' in trade of '.$this->application->department->name)
             ->action('View Application', url('https://getinvolved.fmorwanda.org/admin/login'))
             ->salutation('Thank you!');
     }

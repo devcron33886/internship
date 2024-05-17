@@ -1,6 +1,7 @@
 <form wire:submit="apply">
     <p class="text-md py-3 font-semibold text-black"> All fields with * are mandatory to fill in </p>
     <hr class="w-[75%]">
+    <div class="grid grid-cols-2 gap-4">
     <label class="flex flex-col gap-2 mt-4">
         Names *
         <x-text-input type="text" autofocus wire:model="name" class="block mt-2 w-full read-only:opacity-50 read-only:cursor-not-allowed"/>
@@ -22,8 +23,27 @@
                 <option value="" selected disabled>Select how you will work with us</option>
                @foreach(App\Models\Enum\ApplicationType::cases() as $type)
                     <option value="{{ $type->value}}">{{ $type->getLabel()}}</option>
-                @endforeach       
+                @endforeach
         </select>
+        @error('type')<div class="text-sm text-red-500 font-normal">{{ $message }}</div>@enderror
+
+    </label>
+     <label class="flex flex-col gap-2 mt-4">
+        Add supportive document (Ex: CV)
+        <div
+        x-data="{ uploading: false, progress: 0 }"
+        x-on:livewire-upload-start="uploading = true"
+        x-on:livewire-upload-finish="uploading = false; progress = 0;"
+        x-on:livewire-upload-progress="progress = $event.detail.progress"
+    >
+        <input type="file" name="document" id="document" wire:model="document" class="border border-gray-300 focus:border-red-800 focus:ring-red-800 rounded-md shadow-sm block mt-2 w-full">
+
+        <div x-show="uploading">
+            <div class="w-full h-4 bg-slate-100 rounded-lg shadow-inner mt-3">
+                <div class="bg-green-500 h-4 rounded-lg" :style="{ width: `${progress}%` }"></div>
+            </div>
+        </div>
+    </div>
         @error('type')<div class="text-sm text-red-500 font-normal">{{ $message }}</div>@enderror
     </label>
     <label class="flex flex-col gap-2 mt-4">
@@ -45,11 +65,12 @@
     <div class="text-sm text-red-500 font-normal">{{ $message }}</div>
     @enderror
 </label>
+</div>
 
-               
 
-                    
-            
+
+
+
     <x-primary-button class="mt-4">Send application</x-primary-button>
 </form>
 
