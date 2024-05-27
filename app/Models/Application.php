@@ -8,10 +8,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Application extends Model
+class Application extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, InteractsWithMedia,SoftDeletes;
+
+    public $table = 'applications';
+
+    protected $appends = [
+        'document',
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
 
     protected $fillable = [
         'department_id',
@@ -34,5 +48,10 @@ class Application extends Model
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function getDocumentAttribute()
+    {
+        return $this->getMedia('document')->last();
     }
 }

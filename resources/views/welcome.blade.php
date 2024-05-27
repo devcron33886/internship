@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +14,8 @@
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
     <!-- Fonts -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+
     <style>
         [x-cloak] {
             display: none !important;
@@ -36,7 +37,7 @@
                             <h3 class="text-2xl font-extrabold text-red-700 sm:text-3xl">Application Form</h3>
 
                             <div class="mt-8">
-                                <livewire:application-form/>
+                                <livewire:application-form />
                             </div>
                         </div>
                     </div>
@@ -86,5 +87,8 @@
             </div>
         </div>
     </footer>
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+
 </body>
+
 </html>
