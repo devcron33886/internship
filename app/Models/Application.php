@@ -8,31 +8,47 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Application extends Model
-{
-    use HasFactory, SoftDeletes;
+class Application extends Model implements HasMedia {
+	use HasFactory, InteractsWithMedia, SoftDeletes;
 
-    protected $fillable = [
-        'department_id',
-        'name',
-        'email',
-        'phone',
-        'status',
-        'document',
-        'type',
-        'biography',
-        'interview_date',
-        'interview_notes',
-    ];
+	public $table = 'applications';
 
-    protected $casts = [
-        'status' => ApplicationStatus::class,
-        'type' => ApplicationType::class,
-    ];
+	protected $appends = [
+		'supportive_document',
+	];
 
-    public function department(): BelongsTo
-    {
-        return $this->belongsTo(Department::class);
-    }
+	protected $dates = [
+		'created_at',
+		'updated_at',
+		'deleted_at',
+	];
+
+	protected $fillable = [
+		'department_id',
+		'name',
+		'email',
+		'phone',
+		'status',
+		'document',
+		'type',
+		'biography',
+		'interview_date',
+		'interview_notes',
+	];
+
+	protected $casts = [
+		'status' => ApplicationStatus::class,
+		'type' => ApplicationType::class,
+	];
+
+	public function department(): BelongsTo {
+		return $this->belongsTo(Department::class);
+	}
+
+	public function getSupportiveDocumentAttribute() {
+		return $this->getMedia('supportive_document')->last();
+	}
 }

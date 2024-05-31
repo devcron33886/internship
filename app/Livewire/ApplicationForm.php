@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Models\Application;
 use App\Models\Department;
 use Livewire\Attributes\Rule;
@@ -9,11 +10,11 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class ApplicationForm extends Component {
-	use WithFileUploads;
+	use WithFileUploads, MediaUploadingTrait;
 
 	#[Rule('max:2048', message: 'Upload correct pdf document which is not greater than 2 MB.')]
 	#[Rule('mimes:pdf', message: 'Pdf document are allowed type of document only')]
-	public $document = '';
+	public $supportive_document = '';
 
 	#[Rule('required', message: 'Yoo write both names')]
 	#[Rule('min:5', message: 'Come on those names are too short!')]
@@ -41,19 +42,22 @@ class ApplicationForm extends Component {
 
 	public function apply() {
 		$this->validate();
-		$name = $this->document->getClientOriginalName();
-		$document = $this->document->storeAs('documents', $name, 'public');
-		Application::create([
+
+		$application = Application::create([
 			'name' => $this->name,
 			'email' => $this->email,
 			'phone' => $this->phone,
 			'department_id' => $this->department_id,
-			'document' => $this->document,
 			'type' => $this->type,
 			'biography' => $this->biography,
 		]);
-		$this->reset();
-		$this->showSuccessIndicator = true;
+		if ($this->supportive_document) {
+			$application
+				->addMedia($this->supportive_document->getRealPath())
+				->toMediaCollection('supportive_document');
+		}
+		return redirect()->route('welcome');
+
 	}
 
 	public function render() {
