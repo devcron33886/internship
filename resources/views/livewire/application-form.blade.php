@@ -42,12 +42,7 @@
         </label>
         <label class="flex flex-col gap-2 mt-4">
             Add supportive document (Ex: CV)
-
-<<<<<<< HEAD
             <x-document-component wire:model="supportive_document" />
-=======
-            <x-document-component wire:model="document" />
->>>>>>> a199ac64ceb74a404b97f9f571a3e81e358741b9
 
             @error('type')
                 <div class="text-sm text-red-500 font-normal">{{ $message }}</div>
@@ -75,10 +70,6 @@
             @enderror
         </label>
     </div>
-
-
-
-
 
     <x-primary-button class="mt-4">Send application</x-primary-button>
 </form>
